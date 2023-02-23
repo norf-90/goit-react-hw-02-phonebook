@@ -25,10 +25,22 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
-  updateContacts = contact => {
+  updateContacts = newContact => {
+    const { contacts } = this.state;
+    const isNameAlreadyExist = Boolean(
+      contacts.find(contact => {
+        return contact.name === newContact.name;
+      })
+    );
+
+    if (isNameAlreadyExist) {
+      alert(`${newContact.name} is already in contacts.`);
+      return;
+    }
+
     this.setState(prevState => {
       return {
-        contacts: [...prevState.contacts, contact],
+        contacts: [...prevState.contacts, newContact],
       };
     });
   };
