@@ -2,19 +2,27 @@ import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 
 const INIT_CONTACTS = [
-  { id: nanoid(), name: 'Pablo Escobar', number: '044-000-00-00' },
-  { id: nanoid(), name: 'Quentin Tarantino', number: '063-999-55-44' },
+  {
+    id: nanoid(),
+    name: 'Pablo Emilio Escobar Gaviria',
+    number: '044-000-00-00',
+  },
+  { id: nanoid(), name: 'Quentin Jerome Tarantino', number: '063-999-55-44' },
+  { id: nanoid(), name: 'Валерій Фeдорович Залужний', number: '066-111-22-33' },
 ];
+
 class App extends Component {
   state = {
     contacts: [...INIT_CONTACTS],
     name: '',
     number: '',
+    filter: '',
   };
 
   ids = {
     inputNameId: nanoid(),
     inputTelId: nanoid(),
+    inputFilterId: nanoid(),
   };
 
   handleChange = evt => {
@@ -40,9 +48,13 @@ class App extends Component {
   };
 
   render() {
-    const { inputNameId, inputTelId } = this.ids;
-    const { name, number } = this.state;
+    const { inputNameId, inputTelId, inputFilterId } = this.ids;
+    const { name, number, filter } = this.state;
     const { contacts } = this.state;
+    const filteredContacts = contacts.filter(({ id, name, number }) =>
+      name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+    );
+
     return (
       <>
         <form onSubmit={this.handleSubmit}>
@@ -76,8 +88,23 @@ class App extends Component {
           <button type="submit">Add contact</button>
         </form>
 
+        <form>
+          <label htmlFor={inputFilterId}>
+            Name
+            <input
+              type="text"
+              name="filter"
+              id={inputFilterId}
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+              value={filter}
+              onChange={this.handleChange}
+            />
+          </label>
+        </form>
         <ul>
-          {contacts.map(({ id, name, number }) => {
+          {filteredContacts.map(({ id, name, number }) => {
             return (
               <li key={id}>
                 {name} - {number}
