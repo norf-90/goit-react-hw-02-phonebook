@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import Contact from './contact/Contact';
 
 const ContactList = props => {
-  const { renderData } = props;
+  const { renderData, onDelete } = props;
   return (
     <ul>
-      {renderData.map(({ id, name, number }) => {
-        return <Contact key={id} name={name} number={number} />;
-      })}
+      {renderData.map(({ id, name, number }) => (
+        <Contact key={id} name={name} number={number} onDelete={onDelete} />
+      ))}
     </ul>
   );
 };
