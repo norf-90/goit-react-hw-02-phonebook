@@ -1,6 +1,13 @@
 import { nanoid } from 'nanoid';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {
+  Form,
+  Label,
+  InputTitle,
+  Input,
+  SubmitBtn,
+} from './ContactForm.styled';
 
 export default class ContactForm extends Component {
   state = {
@@ -20,9 +27,10 @@ export default class ContactForm extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
+    console.log('i am in contactform');
     const { name, number } = this.state;
-    const contact = { id: nanoid(), name, number };
-    this.props.updateContacts(contact);
+    const contact = { id: nanoid(), name: name, number: number };
+    this.props.insertContact(contact);
     this.reset();
   };
 
@@ -35,39 +43,41 @@ export default class ContactForm extends Component {
     const { name, number } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor={inputNameId}>
-          Name
-          <input
+        <Label htmlFor={inputNameId}>
+          <InputTitle>Name</InputTitle>
+          <Input
             type="text"
             name="name"
             id={inputNameId}
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            placeholder="Brendan Eich"
             required
             value={name}
             onChange={this.handleChange}
           />
-        </label>
-        <label htmlFor={inputTelId}>
-          Tel
-          <input
+        </Label>
+        <Label htmlFor={inputTelId}>
+          <InputTitle>Tel</InputTitle>
+          <Input
             type="tel"
             name="number"
             id={inputTelId}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
+            placeholder="063-111-22-33"
             value={number}
             onChange={this.handleChange}
           />
-        </label>
+        </Label>
 
-        <button type="submit">Add contact</button>
+        <SubmitBtn type="submit">Add contact</SubmitBtn>
       </form>
     );
   }
 }
 
 ContactForm.propTypes = {
-  updateContacts: PropTypes.func.isRequired,
+  insertContact: PropTypes.func.isRequired,
 };

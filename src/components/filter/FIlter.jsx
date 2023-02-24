@@ -1,14 +1,15 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
+import { Label, FilterTitle, FilterInput } from './Filter.styled';
 
 const Filter = props => {
   const inputFilterId = nanoid();
   const { filter, onChange } = props;
   return (
-    <label htmlFor={inputFilterId}>
-      Filter by name
-      <input
+    <Label htmlFor={inputFilterId}>
+      <FilterTitle>Filter by name</FilterTitle>
+      <FilterInput
         type="text"
         name="filter"
         id={inputFilterId}
@@ -18,7 +19,7 @@ const Filter = props => {
         value={filter}
         onChange={onChange}
       />
-    </label>
+    </Label>
   );
 };
 

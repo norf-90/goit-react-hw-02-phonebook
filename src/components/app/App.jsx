@@ -3,6 +3,10 @@ import { nanoid } from 'nanoid';
 import ContactForm from 'components/contact-form/ContactForm';
 import Filter from 'components/filter/FIlter';
 import ContactList from 'components/contact-list/ContactList';
+import { Layout } from 'components/Layout.styled';
+import { GlobalStyles } from 'components/GlobalStyles';
+import { MainTitle } from 'components/title/MainTitle.styled';
+import { SecondaryTitle } from 'components/title/SecondaryTitle.styled';
 
 const INIT_CONTACTS = [
   { id: nanoid(), name: 'Pablo Emilio Escobar', number: '111-111-11-11' },
@@ -61,12 +65,15 @@ class App extends Component {
 
     return (
       <>
-        <h1>Phonebook</h1>
-        <ContactForm updateContacts={this.insertContact} />
+        <Layout>
+          <MainTitle>Phonebook</MainTitle>
+          <ContactForm insertContact={this.insertContact} />
 
-        <h2>Contacts</h2>
-        <Filter filter={filter} onChange={this.handleChange} />
-        <ContactList renderData={renderData} onDelete={this.deleteContact} />
+          <SecondaryTitle>Contacts</SecondaryTitle>
+          <Filter filter={filter} onChange={this.handleChange} />
+          <ContactList renderData={renderData} onDelete={this.deleteContact} />
+        </Layout>
+        <GlobalStyles />
       </>
     );
   }

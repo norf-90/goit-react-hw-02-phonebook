@@ -1,5 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  ListItem,
+  ContactName,
+  ContactNumber,
+  DeleteButton,
+} from './Contact.styled';
 
 const Contact = props => {
   const { name, number, onDelete } = props;
@@ -9,13 +15,13 @@ const Contact = props => {
   };
 
   return (
-    <li>
-      <span>{name}</span>
-      <span>{number}</span>
-      <button type="button" onClick={onClick}>
-        Delete
-      </button>
-    </li>
+    <ListItem>
+      <ContactName>{name}</ContactName>
+      <ContactNumber>{number}</ContactNumber>
+      <DeleteButton type="button" onClick={onClick}>
+        X
+      </DeleteButton>
+    </ListItem>
   );
 };
 Contact.propTypes = {
