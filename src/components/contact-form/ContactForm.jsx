@@ -27,7 +27,6 @@ export default class ContactForm extends Component {
 
   handleSubmit = evt => {
     evt.preventDefault();
-    console.log('i am in contactform');
     const { name, number } = this.state;
     const contact = { id: nanoid(), name: name, number: number };
     this.props.insertContact(contact);
@@ -42,7 +41,7 @@ export default class ContactForm extends Component {
     const { inputNameId, inputTelId } = this.ids;
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <Label htmlFor={inputNameId}>
           <InputTitle>Name</InputTitle>
           <Input
@@ -73,7 +72,7 @@ export default class ContactForm extends Component {
         </Label>
 
         <SubmitBtn type="submit">Add contact</SubmitBtn>
-      </form>
+      </Form>
     );
   }
 }

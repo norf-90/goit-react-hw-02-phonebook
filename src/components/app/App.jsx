@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
 import ContactForm from 'components/contact-form/ContactForm';
 import Filter from 'components/filter/FIlter';
 import ContactList from 'components/contact-list/ContactList';
-import { Layout } from 'components/Layout.styled';
-import { GlobalStyles } from 'components/GlobalStyles';
-import { MainTitle } from 'components/title/MainTitle.styled';
-import { SecondaryTitle } from 'components/title/SecondaryTitle.styled';
-
-const INIT_CONTACTS = [
-  { id: nanoid(), name: 'Pablo Emilio Escobar', number: '111-111-11-11' },
-  { id: nanoid(), name: 'Quentin Jerome Tarantino', number: '333-333-33-33' },
-  { id: nanoid(), name: 'ValeriiZaluzhnyi', number: '555-55-55-55' },
-  { id: nanoid(), name: 'Tutankhamun', number: '777-777-77-77' },
-  { id: nanoid(), name: 'Brendan Eich', number: '999-999-99-99' },
-];
+import { Layout, MainTitle, SecondaryTitle, GlobalStyles } from '.';
 
 class App extends Component {
   state = {
-    contacts: [...INIT_CONTACTS],
+    contacts: [],
     filter: '',
   };
 
